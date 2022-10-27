@@ -8,5 +8,5 @@ Extract from .log file an "ERROR" and "WARN" level messages and return them into
 --putty_session_update--
 Creates new mirror links and updates spsl configuration through session file
 
---Events_from_db_send_to_kafka--
+--Send_to_kafka_from_db--
 make all the process from getting info from db_connect, make json massage from it and send it to kafka

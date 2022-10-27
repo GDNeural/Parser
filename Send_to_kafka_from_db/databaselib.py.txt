@@ -1,0 +1,37 @@
+import cx_Oracle
+import os
+
+
+def get_result(sql_request, db_config):
+
+    # Init DB and credentials
+
+    os.environ["ORACLE_HOME"] = "/oracle/app/oracle/product/12.1.0/client_1/"
+    
+    host = db_config[0]
+    port = db_config[1]
+    alias = db_config[2]
+    
+    dsn_tns = cx_Oracle.makedsn(host, port, alias)
+
+    # The path to secrets must be absolute or cron won't work 
+    
+    with open("/home/cr_sapbo/Monitoring/secrets/secrets.txt") as f:
+        
+        # Read username and password from secrets and connect to DB
+        # lines = f.readlines()
+        # username = lines[0].strip()
+        # password = lines[1].strip()
+        # print(username, password)
+        
+        connection = cx_Oracle.connect (user='cr_help', password='cr_help__17Asurfr', dsn=dsn_tns)
+        
+        # Execute sql and return
+        
+        cur = connection.cursor()
+        data = cur.execute(sql_request)
+        result = data.fetchall()
+        print('Result %s was fetched'%result)
+        
+        connection.close()
+        return result

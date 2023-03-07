@@ -10,3 +10,7 @@ Creates new mirror links and updates spsl configuration through session file
 
 --Send_to_kafka_from_db--
 make all the process from getting info from db_connect, make json massage from it and send it to kafka
+
+
+--Automotation project--
+Creating user in projects

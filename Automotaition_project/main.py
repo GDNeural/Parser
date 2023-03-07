@@ -58,7 +58,7 @@ with os.scandir(path_to_json_folder) as it:
                 fio = transliterate.transliterate(str.lower(l_name + f_name[0] + mid_name[0]))
                 position = user_info["position"]
                 tab_nom = user_info["tabnom"]
-                email = "%s@cash-u.com" % fio
+                email = "%s@domain.com" % fio
                 org_id = str(dict_organisation_to_id[user_info["org"]])
                 language = "RU RU"
                 pwd_for_user = "12345Qwerty!"

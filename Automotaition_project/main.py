@@ -27,22 +27,12 @@ kc_username = os.environ['KEYCLOAK_USERNAME']
 kc_pwd = os.environ['KEYCLOAK_PASSWORD']
 
 # INFORMATION_DICTIONARIES
-dict_organisation_to_id = {"ООО Кибертех": 1, "ООО МКК \"Киберлэндинг\"": 2, "ИП Слезин": 3, "ООО Крауд": 4,
-                           "ООО МАД софт": 5, "НБКИ": 6, "Эквифакс": 7, "ИНТИС": 8, "SIGMA messaging": 9,
-                           "ООО Киберколлект": 10, "ТрансКапиталБанк": 11, "Альфабанк": 12, "IDX": 13,
-                           "DAIMA": 14, "DADATA": 15}
+dict_organisation_to_id = {"..."}
 
-dict_profile_to_id = {"Administrator": 1, "Portal user": 2, "Configuration Manager": 3, "Service Desk Agent": 4,
-                      "Support Agent": 5, "Problem Manager": 6, "Change Implementor": 7, "Change Supervisor": 8,
-                      "Change Approver": 9, "Service Manager": 10, "Document author": 11, "Portal power user": 12,
-                      "REST Services User": 1024}
+dict_profile_to_id = {"...."}
 
-# dict_function_to_profile_ids = {
-#     "Специалист ": [2, 11],
-#     "Старший специалист": [2, 9, 11],
-#     "Эксперт по вознаграждению C&B (компенсация и бенефиты)": [2, 11]
-# }
-kc_token_url = "https://kc.cunet.ru/realms/master/protocol/openid-connect/token"
+# dict_function_to_profile_ids = {"..."}
+kc_token_url = "https://url/realms/master/protocol/openid-connect/token"
 data = {
     "username": kc_username,
     "password": kc_pwd,
@@ -112,7 +102,7 @@ with os.scandir(path_to_json_folder) as it:
                 ## ITOP PART
                 # FORM_URLS_FOR_SENDING
 
-                person_create_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
+                person_create_url = "https://itop/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
                                     "&json_data={\"operation\": \"core/create\", \"comment\": \"Adding new user\", \"class\": " \
                                     "\"Person\", \"output_fields\": \"friendlyname, email\",\"fields\": {\"name\": \"%s\", " \
                                     "\"first_name\": \"%s\", \"email\": \"%s\", \"mobile_phone\": \"%s\", " \
@@ -120,7 +110,7 @@ with os.scandir(path_to_json_folder) as it:
                                     (php_version, itop_login, itop_pwd, l_name, f_name, email, mob_phone,
                                      tab_nom, position, org_id)
 
-                ext_usr_create_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
+                ext_usr_create_url = "https://itop/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
                                            "&json_data={\"operation\": \"core/create\",\"comment\": \"Adding new user\", " \
                                            "\"class\": \"UserExternal\", \"output_fields\": \"login, email\",\"fields\":" \
                                            "{\"login\": \"%s\", \"language\": \"%s\", \"profile_list\": %s}} " % \
@@ -142,7 +132,7 @@ with os.scandir(path_to_json_folder) as it:
                     user_id = user[i]["key"]
 
                 # FORM_URL_FOR_CREATING_CONNECTION+SENDING
-                put_together_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
+                put_together_url = "https://itop/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
                                    "&json_data={\"operation\": \"core/update\",\"comment\": " \
                                    "\"Adding Persona to new user\", \"class\": \"UserExternal\", \"key\":\"%s\", " \
                                    "\"output_fields\": \"login, email\", \"fields\": {\"contactid\": \"%s\"}} " % \

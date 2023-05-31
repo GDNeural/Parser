@@ -24,7 +24,7 @@ class Email:
              
             Вам был предоставлен доступ к порталу поддержки Itop. 
             
-            Ссылка для входа - https://itop.cunet.ru/pages/UI.php
+            Ссылка для входа - https://itop.ru/pages/UI.php
             
             Login: %s ,
             password: %s

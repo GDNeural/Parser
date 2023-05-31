@@ -59,63 +59,8 @@ with os.scandir(path_to_json_folder) as it:
 
                     ## ITOP PART
                     # FORM_URLS_FOR_SENDING
-
-                    person_create_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
-                                        "&json_data={\"operation\": \"core/create\", \"comment\": \"Adding new user\", \"class\": " \
-                                        "\"Person\", \"output_fields\": \"friendlyname, email\",\"fields\": {\"name\": \"%s\", " \
-                                        "\"first_name\": \"%s\", \"email\": \"%s\", \"mobile_phone\": \"%s\", " \
-                                        "\"employee_number\": \"%s\", \"function\": \"%s\",\"org_id\": \"%s\"}}" % \
-                                        (php_version, itop_login, itop_pwd, l_name, f_name, email, mob_phone,
-                                         tab_nom, position, org_id)
-
-                    ext_usr_create_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
-                                         "&json_data={\"operation\": \"core/create\",\"comment\": \"Adding new user\", " \
-                                         "\"class\": \"UserExternal\", \"output_fields\": \"login, email\",\"fields\":" \
-                                         "{\"login\": \"%s\", \"language\": \"%s\", \"profile_list\": %s}} " % \
-                                         (php_version, itop_login, itop_pwd, fio, language, json.dumps(profile_list))
-
-                    # Делаем POST запрос на создание Person, получаем назад contactid
-                    person_id = ""
-                    user_id = ""
-
-                    person_for_id = requests.request("POST", person_create_url, auth=HTTPBasicAuth(itop_login, itop_pwd)).json()["objects"]
-                    print(person_for_id)
-
-                    for i in person_for_id:
-                        person_id = person_for_id[i]["key"]
-
-                    # POST_REQUEST_FOR_CREATION
-                    user = requests.request("POST", ext_usr_create_url, auth=HTTPBasicAuth(itop_login, itop_pwd)).json()["objects"]
-                    print(user)
-
-                    for i in user:
-                        user_id = user[i]["key"]
-
-
-                    # FORM_URL_FOR_CREATING_CONNECTION+SENDING
-
-                    put_together_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
-                                       "&json_data={\"operation\": \"core/update\",\"comment\": " \
-                                       "\"Adding Persona to new user\", \"class\": \"UserExternal\", \"key\":\"%s\", " \
-                                       "\"output_fields\": \"login, email\", \"fields\": {\"contactid\": \"%s\"}} " % \
-                                       (php_version, itop_login, itop_pwd, user_id, person_id)
-
-                    result = requests.request("PUT", put_together_url, auth=HTTPBasicAuth(itop_login, itop_pwd)).json()
-                    print(result)
-
-                    # COPIYNG TO FOLDER AND DELETE
-                    if 'mob_phone' in locals():
-                        response = SigmaSMS.send_message(mob_phone, 'Доступ к порталу поддержки. login: %s , '
-                                                                    'temp_password: %s' % (fio, pwd_for_user))
-                        print(response)
-                    else:
-                        print('No message sent')
-
-                    Email.send_message(email, f_name, email, pwd_for_user)
-
-                    os.popen('cp %s %s' % (path_to_file, path_to_json_folder + '/archive'))
-                    os.popen('rm -r --interactive=never -- "%s"' % path_to_file)
-                    print("Файл удален.")
+  
+ 
 
                 elif user_data["operation"] == "core/lock":
                     user_block(path_to_file)

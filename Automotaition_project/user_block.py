@@ -28,7 +28,7 @@ def user_block(path_to_file):
 
         # FORM_URL_FOR_USER_ID_INFO
 
-        user_get_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
+        user_get_url = "https://itop.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
                        "&json_data={\"operation\": \"core/get\", \"class\": \"UserExternal\", \"key\": " \
                        "\"SELECT UserExternal WHERE contactid_friendlyname = '%s %s' \"}" % \
                        (php_version, itop_login, itop_pass, f_name, l_name)
@@ -42,7 +42,7 @@ def user_block(path_to_file):
             blocking_user_id = user_for_blocking[i]["key"]
             print(f'Itop user id is {blocking_user_id}')
 
-        user_block_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s&json_data={" \
+        user_block_url = "https://itop.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s&json_data={" \
                          "\"operation\": \"core/update\", \"comment\": \"Blocking user\", \"class\": \"UserExternal\", " \
                          "\"key\": %s, \"output_fields\": \"login, email\", \"fields\": {\"status\": \"disabled\"}}" % \
                          (php_version, itop_login, itop_pass, blocking_user_id)

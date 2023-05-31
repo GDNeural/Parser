@@ -20,7 +20,7 @@ class Itop:
         self.profile_list = [{"profileid": 2}]
 
     def create_person(self, l_name, f_name, email, mob_phone, org_id, tab_nom=None, position=None):
-        person_create_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
+        person_create_url = "https://itop.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
                             "&json_data={\"operation\": \"core/create\", \"comment\": \"Adding new user\", \"class\": " \
                             "\"Person\", \"output_fields\": \"friendlyname, email\",\"fields\": {\"name\": \"%s\", " \
                             "\"first_name\": \"%s\", \"email\": \"%s\", \"mobile_phone\": \"%s\", " \
@@ -37,7 +37,7 @@ class Itop:
             return person_id
 
     def create_login(self, fio, profile_list):
-        ext_usr_create_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
+        ext_usr_create_url = "https://itop.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
                              "&json_data={\"operation\": \"core/create\",\"comment\": \"Adding new user\", " \
                              "\"class\": \"UserExternal\", \"output_fields\": \"login, email\",\"fields\":" \
                              "{\"login\": \"%s\", \"language\": \"RU\", \"profile_list\": %s}} " % \
@@ -52,7 +52,7 @@ class Itop:
             return user_id
 
     def merge_person_login(self, user_id, person_id):
-        put_together_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
+        put_together_url = "https://itop.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
                            "&json_data={\"operation\": \"core/update\",\"comment\": " \
                            "\"Adding Persona to new user\", \"class\": \"UserExternal\", \"key\":\"%s\", " \
                            "\"output_fields\": \"login, email\", \"fields\": {\"contactid\": \"%s\"}} " % \
@@ -62,7 +62,7 @@ class Itop:
         return result
 
     def get_user_id(self, f_name, l_name):
-        user_get_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
+        user_get_url = "https://itop.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s" \
                        "&json_data={\"operation\": \"core/get\", \"class\": \"UserExternal\", \"key\": " \
                        "\"SELECT UserExternal WHERE contactid_friendlyname = '%s %s' \"}" % \
                        (self.php_version, self.itop_login, self.itop_pass, f_name, l_name)
@@ -77,7 +77,7 @@ class Itop:
             return blocking_user_id
 
     def block_user(self, blocking_user_id):
-        user_block_url = "https://itop.cunet.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s&json_data={" \
+        user_block_url = "https://itop.ru/webservices/rest.php?version=%s&auth_user=%s&auth_pwd=%s&json_data={" \
                          "\"operation\": \"core/update\", \"comment\": \"Blocking user\", \"class\": \"UserExternal\", " \
                          "\"key\": %s, \"output_fields\": \"login, email\", \"fields\": {\"status\": \"disabled\"}}" % \
                          (self.php_version, self.itop_login, self.itop_pass, blocking_user_id)

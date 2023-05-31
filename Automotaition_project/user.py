@@ -22,10 +22,7 @@ class User:
         # FORM_A_PROFILE_LIST_TO_USERS_ROLE
 
     def get_org_id(self):
-        organization_choice = {"ООО Кибертех": 1, "ООО МКК \"Киберлэндинг\"": 2, "ИП Слезин": 3, "ООО Крауд": 4,
-                               "ООО МАД софт": 5, "НБКИ": 6, "Эквифакс": 7, "ИНТИС": 8, "SIGMA messaging": 9,
-                               "ООО Киберколлект": 10, "ТрансКапиталБанк": 11, "Альфабанк": 12, "IDX": 13,
-                               "DAIMA": 14, "DADATA": 15}
+        organization_choice = {"ООО ": 1, "МКК ": 2, "ИП": 3}
 
         org_id = organization_choice[self.org]
 
